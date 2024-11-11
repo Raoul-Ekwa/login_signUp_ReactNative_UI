@@ -1,34 +1,25 @@
-import { StyleSheet, 
-         Text, 
-         Image, 
-         View, 
-         TextInput, 
-         Button, 
-         TouchableOpacity, 
-         ImageBackground 
-        } from 'react-native';
+import { StyleSheet, Text, Image, View, TextInput, Button, TouchableOpacity, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { LinearGradient } from 'expo-linear-gradient';
-import SignUpScreen from './SignUpScreen';
 
 
 const testForgetPassword = () => {
-    return alert('ok');
-};
-
-const seConnecter = () => {
   return alert('ok');
 };
 
 const LoginScreen = () => {
-
   const navigation = useNavigation(); // Utilisation du hook de navigation
 
+  const handleLogin = () => {
+    // Logique de connexion ici
+    navigation.navigate('Acceuil'); // Redirige vers l'écran "Acceuil"
+  };
+
   const goToSignUp = () => {
-    navigation.navigate('SignUp'); // Redirige vers l'écran SignUp(ici il remplace SignUpScreen comme defini dans le Navigator stack) 
+    navigation.navigate('SignUp'); // Redirige vers l'écran SignUp
   };
 
   return (
@@ -47,46 +38,35 @@ const LoginScreen = () => {
 
       <View style={styles.inputContainer}>
         <FontAwesome name="user" size={24} color="#9A9A9A" style={styles.inputIcon} />
-        <TextInput style={styles.textInput} 
-                   placeholder="Email" 
-                   placeholderTextColor="#9A9A9A" />
+        <TextInput style={styles.textInput} placeholder="Email" placeholderTextColor="#9A9A9A" />
       </View>
 
       <View style={styles.inputContainer}>
         <FontAwesome name="lock" size={24} color="#9A9A9A" style={styles.inputIcon} />
         <TextInput style={styles.textInput} 
                    placeholder="Mot de passe" 
-                   placeholderTextColor="#9A9A9A" />
+                   placeholderTextColor="#9A9A9A" 
+                   secureTextEntry={true}/>
       </View>
 
       <View style={styles.forgetPasswordContainer}>
-        <Button title="Mot de passe oublié?" 
-                style={styles.forgetPasswordText} 
-                onPress={testForgetPassword} color="#9A9A9A" 
-        />
+        <Button title="Mot de passe oublié?" onPress={testForgetPassword} color="#9A9A9A" />
       </View>
 
-      <TouchableOpacity style={styles.signInButtonContainer} onPress={seConnecter}>
+      <TouchableOpacity style={styles.signInButtonContainer} onPress={handleLogin}>
         <Text style={styles.signIn}>Se connecter</Text>
-        {/* pour appliquer un fond dégradé, ce qui peut améliorer l'apparence visuelle et l'attrait de l'interface utilisateur.*/}
-        <LinearGradient colors={['#F97794','#623AA2']} style={styles.linearGradient}>
-            <FontAwesome6 name="arrow-right" size={35} color="white" style={styles.singnInIcon} />
+        <LinearGradient colors={['#F97794', '#623AA2']} style={styles.linearGradient}>
+          <FontAwesome6 name="arrow-right" size={35} color="white" style={styles.singnInIcon} />
         </LinearGradient>
       </TouchableOpacity>
-      
+
       <TouchableOpacity style={styles.footerContainer} onPress={goToSignUp}>
-        <Text style={styles.footerText}>vous n'avez pas de compte ?  
-          <Text style={{textDecorationLine:'underline'}}>Créez-en un</Text>
-        </Text>
+        <Text style={styles.footerText}>Vous n'avez pas de compte ? <Text style={{ textDecorationLine: 'underline' }}>Créez-en un</Text></Text>
       </TouchableOpacity>
 
-
       <View style={styles.leftFooterContainer}>
-        <ImageBackground source={require('../assets/images/leftFooterVecto.png')} 
-                         style={styles.leftFooterImage}
-        />
+        <ImageBackground source={require('../assets/images/leftFooterVecto.png')} style={styles.leftFooterImage} />
       </View>
-      
     </View>
   );
 };
@@ -97,7 +77,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f4f6fb',
-    position: 'relative'
+    position: 'relative',
   },
   topImageContainer: {
     height: 50,
@@ -123,8 +103,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     flexDirection: 'row',
     borderRadius: 20,
-    marginHorizontal: 40, //G et D
-    marginVertical: 20, // H  et B
+    marginHorizontal: 40,
+    marginVertical: 20,
     elevation: 10,
     alignItems: 'center',
     height: 70,
@@ -140,16 +120,13 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 220,
   },
-  forgetPasswordText: {
-    textAlign: 'right',
-  },
   signInButtonContainer: {
-     flexDirection: 'row',
+    flexDirection: 'row',
     justifyContent: 'flex-end',
-     alignItems: 'center',
-     gap: 5,
+    alignItems: 'center',
+    gap: 5,
     marginTop: 70,
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
   signIn: {
     color: '#262626',
@@ -162,8 +139,6 @@ const styles = StyleSheet.create({
     borderRadius: 17,
     justifyContent: 'center',
     alignItems: 'center',
-   
-    
   },
   buttonText: {
     color: '#fff',
@@ -171,22 +146,20 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   footerContainer: {
-  //textAlign: 'center',
-  marginTop: 120,
-  //backgroundColor:'#aaa'
+    marginTop: 120,
   },
   footerText: {
-   fontSize: 18,
-   textAlign: 'center',
-   marginLeft: 30
+    fontSize: 18,
+    textAlign: 'center',
+    marginLeft: 30,
   },
   leftFooterContainer: {
     position: 'absolute',
     bottom: 0,
-    left: 0
+    left: 0,
   },
   leftFooterImage: {
     height: 250,
-    width: 150
-  }
+    width: 150,
+  },
 });
